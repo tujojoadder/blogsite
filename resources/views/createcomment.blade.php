@@ -11,11 +11,7 @@
 
                 {{-- Success Message --}}
                 @if(session('success'))
-                <div x-data="{ show: true }" 
-                     x-init="setTimeout(() => show = false, 3000)"
-                     x-show="show"
-                     x-transition
-                     class="alert alert-success">
+                <div class="alert alert-success" role="alert">
                     {{ session('success') }}
                 </div>
                 @endif
@@ -40,7 +36,7 @@
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
                     <div class="card-body p-4">
                         <h6 class="fw-bold mb-3">Leave a comment</h6>
-                        <form action="{{ route('comment.store') }}" method="POST">
+                        <form id="commentForm" action="{{ route('comment.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="post_id" value="{{ $post->id }}">
                             <div class="mb-3">
@@ -48,17 +44,31 @@
                                     name="comment" 
                                     class="form-control" 
                                     rows="3" 
-                                    placeholder="Write your thoughts..."
+                                    placeholder="Write your thoughts..." 
                                     required
                                 ></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Post Comment</button>
+                            <button type="submit" id="submitBtn" class="btn btn-primary">
+                                <span id="submitText">Post Comment</span>
+                                <span id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            </button>
                         </form>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </div>
+
+    {{-- JavaScript to disable the button --}}
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function () {
+            const btn = document.getElementById('submitBtn');
+            const spinner = document.getElementById('submitSpinner');
+            const text = document.getElementById('submitText');
+
+            btn.disabled = true;
+            text.textContent = 'Posting...';
+            spinner.classList.remove('d-none');
+        });
+    </script>
 </x-app-layout>

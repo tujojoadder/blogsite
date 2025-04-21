@@ -94,7 +94,7 @@
                          :userName="$post->user->name"
                         :timePosted="$post->created_at->diffForHumans()"
                         :title="$post->title"
-                        :excerpt="Str::limit($post->content, 150)"
+                        :excerpt="$post->content"
                         :category="$post->category"
                         :categoryColor="match($post->category) {
                             'technology' => 'primary',
