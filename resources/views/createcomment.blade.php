@@ -11,10 +11,14 @@
 
                 {{-- Success Message --}}
                 @if(session('success'))
-                <div class="alert alert-success" role="alert">
+                <div x-data="{ show: true }" 
+                     x-init="setTimeout(() => show = false, 3000)"
+                     x-show="show"
+                     x-transition
+                     class="alert alert-success">
                     {{ session('success') }}
                 </div>
-                @endif
+            @endif
 
                 {{-- Original Post --}}
                 <div class="card border-0 shadow-sm rounded-4 mb-4">
