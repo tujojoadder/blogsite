@@ -27,10 +27,6 @@ Route::get('/createblog', function () {
 })->middleware(['auth', 'verified'])->name('createblog');
 
 
-
-
-
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -47,6 +43,10 @@ Route::middleware('auth')->group(function () {
   Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
   Route::get('/dashboard/{post}/comments', [PostController::class, 'showComments'])
   ->name('posts.comments');
+  Route::get('/dashboard/{post}/comments/create', [PostController::class, 'showMainPost']);
+
+
+
   Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
   Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
 

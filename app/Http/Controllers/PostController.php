@@ -96,4 +96,14 @@ public function showComments(Post $post)
 
 
 
+public function showMainPost(Post $post)
+{
+    return view('createcomment', [
+        'post' => $post,
+       
+    ]);
+}
+
+
+
 }

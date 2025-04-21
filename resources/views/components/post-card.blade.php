@@ -25,9 +25,9 @@
                 </a>
             </div>
             <div>
-                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="collapse" data-bs-target="#commentForm{{ $postId }}">
+                <a href="/dashboard/{{ $postId }}/comments/create" class="btn btn-outline-primary btn-sm">
                     <i class="bi bi-chat-left-text me-1"></i> Make Comment
-                </button>
+                </a>
             </div>
         </div>
 
@@ -52,6 +52,6 @@
     function handleCommentSubmit(form) {
         const btn = form.querySelector('.submit-comment-btn');
         btn.disabled = true;
-        btn.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Submitting...`;
+        btn.innerHTML = <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Submitting...;
     }
 </script>
